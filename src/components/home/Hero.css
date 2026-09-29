@@ -1,0 +1,287 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+  /* Bleed the background up behind the sticky navbar: pull the box up by
+     exactly the navbar's height, then pad the same amount back in so the
+     actual content (.hero__inner) lands in the same place it always did.
+     Only the background (.hero__bg / the grain, both inset:0 to this box)
+     ends up extending under the navbar -- nothing here moves the content. */
+  margin-top: calc(-1 * var(--navbar-height));
+  padding-top: var(--navbar-height);
+}
+
+/* Wolf pack background photo, edge-to-edge. The photo is a single layer in
+   this stack (via the --hero-bg-image custom property set inline in
+   Hero.jsx, since Vite's imported asset URL isn't known at CSS-author time);
+   the black/transparent gradients on top of it are what keep the edges dark
+   and the text columns readable -- see the design brief this implements. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, 100% 100%, cover;
+  background-position: 0 0, 0 0, 0 0, center 30%;
+  background-image: linear-gradient(
+      to right,
+      #080808 0%,
+      rgba(8, 8, 8, 0) 26%,
+      rgba(8, 8, 8, 0) 74%,
+      #080808 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(8, 8, 8, 0.55) 0,
+      rgba(8, 8, 8, 0.3) var(--navbar-height),
+      rgba(8, 8, 8, 0) calc(var(--navbar-height) + 100px),
+      rgba(8, 8, 8, 0) 78%,
+      #080808 100%
+    ),
+    linear-gradient(rgba(8, 8, 8, 0.35), rgba(8, 8, 8, 0.35)), var(--hero-bg-image);
+  /* wolf_pic4 has a visible dusk sky (pink/purple) -- grayscale keeps it
+     consistent with the site's monochrome direction like the other hero
+     photos, all of which were already black & white. */
+  filter: grayscale(1);
+}
+
+/* Extremely subtle grain -- a faint dot texture, not a gradient or glow.
+   Sits above the photo (::after paints after the .hero__bg element) so it
+   never muddies the photo underneath, and below the content (.hero__inner
+   has an explicit higher z-index). */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(245, 245, 245, 0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 64px;
+  padding-top: 48px;
+  padding-bottom: 40px;
+}
+
+@media (min-width: 1024px) {
+  .hero__inner {
+    min-height: clamp(420px, 42vh, 500px);
+  }
+}
+
+/* ---------- Left column ---------- */
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.5rem, 4vw + 1.75rem, 6.25rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.hero__title-line {
+  display: block;
+}
+
+.hero__description {
+  margin-top: 20px;
+  max-width: 440px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.hero__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast),
+    border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.hero__button--primary {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
+}
+
+.hero__button--primary:hover {
+  background: transparent;
+  color: var(--color-text);
+}
+
+.hero__button--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.hero__button--secondary:hover {
+  border-color: var(--color-text-secondary);
+}
+
+.hero__meta {
+  margin-top: 18px;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Right column ---------- */
+
+.hero__playlist {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__artwork {
+  width: 100%;
+  max-width: 420px;
+  line-height: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.hero__artwork-embed {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+.hero__playlist-info {
+  margin-top: 14px;
+  max-width: 420px;
+}
+
+.hero__playlist-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+.hero__playlist-description {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.hero__playlist-credit {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1024px) {
+  .hero__inner {
+    gap: 48px;
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+
+  .hero__description {
+    font-size: 1rem;
+  }
+
+  .hero__artwork {
+    max-width: 320px;
+  }
+}
+
+/* ---------- Mobile: stack vertically ---------- */
+
+@media (max-width: 760px) {
+  /* Portrait photo, single stacked column: no left/right fade needed (there's
+     only one column now), but text sits directly over the full-width photo,
+     so darken top (behind headline) and bottom (blend into the page) more
+     than desktop, and re-tune the vertical position for this narrower crop. */
+  .hero__bg {
+    background-size: 100% 100%, 100% 100%, cover;
+    background-position: 0 0, 0 0, center 24%;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(8, 8, 8, 0.65) 0,
+        rgba(8, 8, 8, 0.45) var(--navbar-height),
+        rgba(8, 8, 8, 0.5) calc(var(--navbar-height) + 60px),
+        rgba(8, 8, 8, 0.35) 42%,
+        rgba(8, 8, 8, 0.55) 74%,
+        #080808 100%
+      ),
+      linear-gradient(rgba(8, 8, 8, 0.5), rgba(8, 8, 8, 0.5)), var(--hero-bg-image);
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 36px;
+    padding-bottom: 32px;
+  }
+
+  .hero__content {
+    align-items: stretch;
+  }
+
+  .hero__playlist {
+    align-items: stretch;
+  }
+
+  .hero__artwork {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__button {
+    justify-content: center;
+  }
+}

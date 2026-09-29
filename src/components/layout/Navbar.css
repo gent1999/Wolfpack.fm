@@ -1,0 +1,93 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-navbar);
+  width: 100%;
+  /* Semi-transparent so the hero background (which now extends up behind
+     the navbar -- see .hero's negative margin-top in Hero.css) shows
+     through. On pages with no hero behind it, this just sits over the
+     plain #080808 page background, which reads the same as a solid navbar. */
+  background: rgba(8, 8, 8, 0.35);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__inner {
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.navbar__logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navbar__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar__link:hover {
+  color: var(--color-text);
+}
+
+.navbar__link--active {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+}
+
+.navbar__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border);
+}
+
+.navbar__icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.navbar__icon-button:hover {
+  color: var(--color-text);
+}
+
+.navbar__menu-button {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .navbar__nav {
+    display: none;
+  }
+
+  .navbar__menu-button {
+    display: flex;
+  }
+}
