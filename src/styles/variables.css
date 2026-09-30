@@ -9,7 +9,8 @@
   --color-text-muted: #666666;
 
   /* Typography */
-  --font-sans: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo Black', sans-serif;
 
   /* Layout */
   --container-max: 1440px;

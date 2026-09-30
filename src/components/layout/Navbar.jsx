@@ -18,6 +18,7 @@ function Navbar() {
     <header className="navbar">
       <div className="site-container navbar__inner">
         <NavLink to="/" className="navbar__logo" aria-label="Wolfpack.fm home">
+          <img src="/wolf_favicon.png" alt="" className="navbar__logo-icon" />
           WOLFPACK.FM
         </NavLink>
 

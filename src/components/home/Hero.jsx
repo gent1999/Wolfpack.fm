@@ -1,4 +1,4 @@
-import { ArrowRight, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import wolfPic5 from '../../assets/wolf_pic5.jpg';
 import './Hero.css';
 
@@ -33,23 +33,12 @@ function Hero() {
               <Play size={16} strokeWidth={2} fill="currentColor" aria-hidden="true" />
               Listen Now
             </a>
-            <a
-              className="hero__button hero__button--secondary"
-              href={PLAYLIST_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Playlist
-              <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
-            </a>
           </div>
 
           <p className="hero__meta">7 tracks&nbsp;&nbsp;•&nbsp;&nbsp;16 min</p>
         </div>
 
         <div className="hero__playlist">
-          <span className="hero__eyebrow">Featured Playlist</span>
-
           <div className="hero__artwork">
             <iframe
               className="hero__artwork-embed"
@@ -61,14 +50,6 @@ function Hero() {
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             />
-          </div>
-
-          <div className="hero__playlist-info">
-            <h2 className="hero__playlist-title">Wolfpack Radio</h2>
-            <p className="hero__playlist-description">
-              Underground rap, lyricism, and new voices.
-            </p>
-            <p className="hero__playlist-credit">Curated by ECHO + pluggpress.</p>
           </div>
         </div>
       </div>
