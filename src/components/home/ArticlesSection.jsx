@@ -33,8 +33,8 @@ function ArticlesSection() {
               <div className="article-card__image-wrap">
                 <img src={placeholderArt} alt="" className="article-card__image" />
               </div>
+              <span className="article-card__tag">{article.tag}</span>
               <h3 className="article-card__title">{article.title}</h3>
-              {article.excerpt && <p className="article-card__excerpt">{article.excerpt}</p>}
               <p className="article-card__meta">
                 {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt || article.createdAt)}
               </p>

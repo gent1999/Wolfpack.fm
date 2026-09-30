@@ -14,8 +14,7 @@ function Dashboard() {
   }, []);
 
   const total = articles.length;
-  const published = articles.filter((a) => a.status === 'PUBLISHED').length;
-  const drafts = total - published;
+  const tagCount = new Set(articles.map((a) => a.tag)).size;
 
   return (
     <div>
@@ -32,12 +31,8 @@ function Dashboard() {
           <div className="admin-stat__label">Total Articles</div>
         </div>
         <div className="admin-stat">
-          <div className="admin-stat__value">{loading ? '—' : published}</div>
-          <div className="admin-stat__label">Published</div>
-        </div>
-        <div className="admin-stat">
-          <div className="admin-stat__value">{loading ? '—' : drafts}</div>
-          <div className="admin-stat__label">Drafts</div>
+          <div className="admin-stat__value">{loading ? '—' : tagCount}</div>
+          <div className="admin-stat__label">Tags</div>
         </div>
       </div>
     </div>

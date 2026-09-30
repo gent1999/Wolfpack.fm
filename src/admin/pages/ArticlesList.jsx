@@ -47,7 +47,7 @@ function ArticlesList() {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Status</th>
+                <th>Tag</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Actions</th>
@@ -58,9 +58,7 @@ function ArticlesList() {
                 <tr key={article.id}>
                   <td>{article.title}</td>
                   <td>
-                    <span className={`admin-badge ${article.status === 'PUBLISHED' ? 'admin-badge--published' : 'admin-badge--draft'}`}>
-                      {article.status}
-                    </span>
+                    <span className="admin-badge">{article.tag}</span>
                   </td>
                   <td>{formatDate(article.createdAt)}</td>
                   <td>{formatDate(article.updatedAt)}</td>

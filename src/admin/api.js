@@ -60,5 +60,4 @@ export const api = {
   createArticle: (data) => request('/api/admin/articles', { method: 'POST', body: data }),
   updateArticle: (id, data) => request(`/api/admin/articles/${id}`, { method: 'PUT', body: data }),
   deleteArticle: (id) => request(`/api/admin/articles/${id}`, { method: 'DELETE' }),
-  setArticleStatus: (id, status) => request(`/api/admin/articles/${id}/status`, { method: 'PATCH', body: { status } }),
 };

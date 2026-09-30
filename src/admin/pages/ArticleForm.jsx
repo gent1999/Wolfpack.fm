@@ -4,10 +4,9 @@ import { api } from '../api.js';
 
 const EMPTY_FORM = {
   title: '',
-  excerpt: '',
+  tag: '',
   content: '',
   authorName: 'Wolfpack.fm',
-  status: 'DRAFT',
 };
 
 function ArticleForm() {
@@ -27,8 +26,8 @@ function ArticleForm() {
     api
       .getArticle(id)
       .then((data) => {
-        const { title, excerpt, content, authorName, status } = data.article;
-        setForm({ title, excerpt: excerpt || '', content, authorName, status });
+        const { title, tag, content, authorName } = data.article;
+        setForm({ title, tag, content, authorName });
       })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
@@ -94,19 +93,22 @@ function ArticleForm() {
         </div>
 
         <div className="admin-field">
-          <label htmlFor="excerpt">Excerpt</label>
+          <label htmlFor="tag">Tag</label>
           <input
-            id="excerpt"
+            id="tag"
             type="text"
-            value={form.excerpt}
-            onChange={(e) => updateField('excerpt', e.target.value)}
+            value={form.tag}
+            onChange={(e) => updateField('tag', e.target.value)}
+            placeholder="e.g. Interviews, News, Reviews"
+            required
           />
         </div>
 
         <div className="admin-field">
-          <label htmlFor="content">Content</label>
+          <label htmlFor="content">Content (Markdown supported)</label>
           <textarea
             id="content"
+            className="admin-field__markdown"
             value={form.content}
             onChange={(e) => updateField('content', e.target.value)}
             required
@@ -123,17 +125,9 @@ function ArticleForm() {
           />
         </div>
 
-        <div className="admin-field">
-          <label htmlFor="status">Status</label>
-          <select id="status" value={form.status} onChange={(e) => updateField('status', e.target.value)}>
-            <option value="DRAFT">Draft</option>
-            <option value="PUBLISHED">Published</option>
-          </select>
-        </div>
-
         <div className="admin-form__actions">
           <button type="submit" className="admin-button admin-button--primary" style={{ width: 'auto' }} disabled={saving}>
-            {saving ? 'Saving…' : isEditing ? 'Save Changes' : 'Save Article'}
+            {saving ? 'Publishing…' : isEditing ? 'Save Changes' : 'Publish'}
           </button>
           <button type="button" className="admin-button admin-button--secondary" onClick={() => navigate('/admin/articles')}>
             Cancel
