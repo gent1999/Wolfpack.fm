@@ -1,11 +1,11 @@
 import Hero from '../components/home/Hero.jsx';
+import ArticlesSection from '../components/home/ArticlesSection.jsx';
 
 function Home() {
-  // Hero only for this pass -- everything below it stays empty dark space
-  // until the next section is built.
   return (
     <main className="page-main" aria-label="Home">
       <Hero />
+      <ArticlesSection />
     </main>
   );
 }
