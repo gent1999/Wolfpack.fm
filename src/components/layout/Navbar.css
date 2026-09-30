@@ -6,8 +6,8 @@
   /* Semi-transparent so the hero background (which now extends up behind
      the navbar -- see .hero's negative margin-top in Hero.css) shows
      through. On pages with no hero behind it, this just sits over the
-     plain #080808 page background, which reads the same as a solid navbar. */
-  background: rgba(8, 8, 8, 0.35);
+     plain --color-bg page background, which reads the same as a solid navbar. */
+  background: rgba(6, 7, 13, 0.35);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -67,7 +67,7 @@
 
 .navbar__link--active {
   color: var(--color-text);
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-accent);
 }
 
 .navbar__divider {
