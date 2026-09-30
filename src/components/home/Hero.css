@@ -11,17 +11,33 @@
   padding-top: var(--navbar-height);
 }
 
-/* Wolf pack background photo, edge-to-edge. The photo is a single layer in
-   this stack (via the --hero-bg-image custom property set inline in
-   Hero.jsx, since Vite's imported asset URL isn't known at CSS-author time);
-   the black/transparent gradients on top of it are what keep the edges dark
-   and the text columns readable -- see the design brief this implements. */
+/* Wolf pack background photo, edge-to-edge, grayscale. Split into its own
+   layer (rather than one of .hero__bg's background-image layers) because
+   `filter` rasterizes the WHOLE element it's set on after all of that
+   element's layers are composited -- putting the blue tint below in the
+   same stack as this filter would grayscale the tint right back out. */
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 30%;
+  background-image: var(--hero-bg-image);
+  /* wolf_pic4 has a visible dusk sky (pink/purple) -- grayscale keeps it
+     consistent with the site's monochrome direction like the other hero
+     photos, all of which were already black & white. */
+  filter: grayscale(1);
+}
+
+/* Vignette + blue "midnight" tint, painted on top of .hero__photo (later in
+   the DOM = higher paint order at the same stacking level) with no filter
+   of its own, so the blue tint actually reads as blue. */
 .hero__bg {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-size: 100% 100%, 100% 100%, 100% 100%, cover;
-  background-position: 0 0, 0 0, 0 0, center 30%;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0;
   background-image: linear-gradient(
       to right,
       #06070d 0%,
@@ -37,15 +53,7 @@
       rgba(6, 7, 13, 0) 78%,
       #06070d 100%
     ),
-    /* Blue-tinted tint (rather than a flat neutral one) over the grayscale
-       photo -- this is the "midnight" wash the rest of the site's accent
-       color plays off of. */
-    linear-gradient(rgba(18, 28, 58, 0.45), rgba(18, 28, 58, 0.45)), var(--hero-bg-image);
-  /* wolf_pic4 has a visible dusk sky (pink/purple) -- grayscale keeps it
-     consistent with the site's monochrome direction like the other hero
-     photos, all of which were already black & white; the blue tint above
-     is layered on top of that grayscale base. */
-  filter: grayscale(1);
+    linear-gradient(rgba(30, 48, 110, 0.5), rgba(30, 48, 110, 0.5));
 }
 
 /* Extremely subtle grain -- a faint dot texture, not a gradient or glow.
@@ -213,9 +221,13 @@
      only one column now), but text sits directly over the full-width photo,
      so darken top (behind headline) and bottom (blend into the page) more
      than desktop, and re-tune the vertical position for this narrower crop. */
+  .hero__photo {
+    background-position: center 24%;
+  }
+
   .hero__bg {
-    background-size: 100% 100%, 100% 100%, cover;
-    background-position: 0 0, 0 0, center 24%;
+    background-size: 100% 100%, 100% 100%;
+    background-position: 0 0, 0 0;
     background-image: linear-gradient(
         to bottom,
         rgba(6, 7, 13, 0.65) 0,
@@ -225,7 +237,7 @@
         rgba(6, 7, 13, 0.55) 74%,
         #06070d 100%
       ),
-      linear-gradient(rgba(18, 28, 58, 0.55), rgba(18, 28, 58, 0.55)), var(--hero-bg-image);
+      linear-gradient(rgba(30, 48, 110, 0.55), rgba(30, 48, 110, 0.55));
   }
 
   .hero__inner {
