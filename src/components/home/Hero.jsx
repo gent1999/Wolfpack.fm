@@ -8,8 +8,7 @@ const PLAYLIST_EMBED_URL = 'https://open.spotify.com/embed/playlist/5BU7iuKWstCx
 function Hero() {
   return (
     <section className="hero" aria-label="Wolfpack Radio">
-      <div className="hero__photo" style={{ '--hero-bg-image': `url(${wolfPic5})` }} aria-hidden="true" />
-      <div className="hero__bg" aria-hidden="true" />
+      <div className="hero__bg" style={{ '--hero-bg-image': `url(${wolfPic5})` }} aria-hidden="true" />
 
       <div className="site-container hero__inner">
         <div className="hero__content">
