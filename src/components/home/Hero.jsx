@@ -30,7 +30,7 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Play size={16} strokeWidth={2} fill="currentColor" aria-hidden="true" />
+              <Play className="hero__button-icon" size={16} strokeWidth={2} fill="currentColor" aria-hidden="true" />
               Listen Now
             </a>
           </div>

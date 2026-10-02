@@ -7,6 +7,9 @@ const EMPTY_FORM = {
   tag: '',
   content: '',
   authorName: 'Wolfpack.fm',
+  spotifyUrl: '',
+  soundcloudUrl: '',
+  youtubeUrl: '',
 };
 
 function ArticleForm() {
@@ -26,8 +29,16 @@ function ArticleForm() {
     api
       .getArticle(id)
       .then((data) => {
-        const { title, tag, content, authorName } = data.article;
-        setForm({ title, tag, content, authorName });
+        const { title, tag, content, authorName, spotifyUrl, soundcloudUrl, youtubeUrl } = data.article;
+        setForm({
+          title,
+          tag,
+          content,
+          authorName,
+          spotifyUrl: spotifyUrl || '',
+          soundcloudUrl: soundcloudUrl || '',
+          youtubeUrl: youtubeUrl || '',
+        });
       })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
@@ -112,6 +123,39 @@ function ArticleForm() {
             value={form.content}
             onChange={(e) => updateField('content', e.target.value)}
             required
+          />
+        </div>
+
+        <div className="admin-field">
+          <label htmlFor="spotifyUrl">Spotify Link (optional)</label>
+          <input
+            id="spotifyUrl"
+            type="url"
+            value={form.spotifyUrl}
+            onChange={(e) => updateField('spotifyUrl', e.target.value)}
+            placeholder="https://open.spotify.com/track/..."
+          />
+        </div>
+
+        <div className="admin-field">
+          <label htmlFor="soundcloudUrl">SoundCloud Link (optional)</label>
+          <input
+            id="soundcloudUrl"
+            type="url"
+            value={form.soundcloudUrl}
+            onChange={(e) => updateField('soundcloudUrl', e.target.value)}
+            placeholder="https://soundcloud.com/..."
+          />
+        </div>
+
+        <div className="admin-field">
+          <label htmlFor="youtubeUrl">YouTube Link (optional)</label>
+          <input
+            id="youtubeUrl"
+            type="url"
+            value={form.youtubeUrl}
+            onChange={(e) => updateField('youtubeUrl', e.target.value)}
+            placeholder="https://www.youtube.com/watch?v=..."
           />
         </div>
 

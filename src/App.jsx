@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx';
 import Radio from './pages/Radio.jsx';
 import Artists from './pages/Artists.jsx';
 import Stories from './pages/Stories.jsx';
+import Story from './pages/Story.jsx';
 import Submit from './pages/Submit.jsx';
 import { AuthProvider } from './admin/AuthContext.jsx';
 import ProtectedRoute from './admin/ProtectedRoute.jsx';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/radio" element={<PublicPage><Radio /></PublicPage>} />
         <Route path="/artists" element={<PublicPage><Artists /></PublicPage>} />
         <Route path="/stories" element={<PublicPage><Stories /></PublicPage>} />
+        <Route path="/stories/:slug" element={<PublicPage><Story /></PublicPage>} />
         <Route path="/submit" element={<PublicPage><Submit /></PublicPage>} />
 
         <Route path="/admin/login" element={<Login />} />

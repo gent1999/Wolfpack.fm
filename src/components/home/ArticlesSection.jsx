@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import placeholderArt from '../../assets/wolf_pic3.jpg';
 import './ArticlesSection.css';
 
@@ -29,7 +30,7 @@ function ArticlesSection() {
 
         <div className="articles-section__grid">
           {articles.map((article) => (
-            <article key={article.id} className="article-card">
+            <Link key={article.id} to={`/stories/${article.slug}`} className="article-card">
               <div className="article-card__image-wrap">
                 <img src={placeholderArt} alt="" className="article-card__image" />
               </div>
@@ -38,7 +39,7 @@ function ArticlesSection() {
               <p className="article-card__meta">
                 {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt || article.createdAt)}
               </p>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
