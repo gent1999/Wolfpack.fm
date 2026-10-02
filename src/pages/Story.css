@@ -82,7 +82,7 @@
 }
 
 .ad-placeholder {
-  border: 1px dashed var(--color-border);
+  border: 1px dashed rgba(59, 130, 246, 0.3);
   background: var(--color-surface);
   color: var(--color-text-muted);
   font-size: 0.7rem;
@@ -97,7 +97,7 @@
 }
 
 .story-side__playlist {
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-accent);
   background: var(--color-surface);
   padding: 16px;
 }
@@ -142,9 +142,10 @@
 .story__title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.9rem, 2.5vw + 1.3rem, 3rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.1rem, 3vw + 1.3rem, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 
@@ -154,7 +155,7 @@
   letter-spacing: 0.02em;
   color: var(--color-text-muted);
   padding-bottom: 28px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.35);
 }
 
 .story__content {
@@ -173,6 +174,8 @@
 .story__content h3 {
   font-family: var(--font-display);
   font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--color-text);
   line-height: 1.3;
   margin-top: 1.6em;
@@ -180,6 +183,12 @@
 
 .story__content h1 {
   font-size: 1.6rem;
+}
+
+.story__content h2,
+.story__content h3 {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 0.6em;
 }
 
 .story__content h2 {
@@ -242,7 +251,7 @@
 .story__embeds {
   margin-top: 40px;
   padding-top: 32px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(59, 130, 246, 0.35);
   display: flex;
   flex-direction: column;
   gap: 16px;
