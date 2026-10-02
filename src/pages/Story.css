@@ -1,11 +1,23 @@
-.story {
-  max-width: 760px;
-  padding-top: 48px;
-  padding-bottom: 96px;
+/* Matches Cry808's article page width (1600px, not the site's usual
+   1440px --container-max) since it needs room for the ad columns. */
+.story-page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+@media (min-width: 1280px) {
+  .story-page {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
 
 .story--loading,
 .story--error {
+  padding-top: 48px;
+  padding-bottom: 96px;
   color: var(--color-text-secondary);
 }
 
@@ -16,6 +28,75 @@
   color: var(--color-text);
   margin-bottom: 16px;
 }
+
+/* ---------- Three-column layout ---------- */
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'content' 'right' 'left';
+  gap: 32px;
+  padding-top: 48px;
+  padding-bottom: 96px;
+  align-items: start;
+}
+
+@media (min-width: 1200px) {
+  .story-layout {
+    grid-template-columns: 220px minmax(0, 1fr) 320px;
+    grid-template-areas: 'left content right';
+    gap: 32px;
+  }
+}
+
+.story-ads-left {
+  grid-area: left;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-main {
+  grid-area: content;
+  min-width: 0;
+}
+
+.story-side {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 1200px) {
+  .story-ads-left {
+    display: flex;
+    position: sticky;
+    top: calc(var(--navbar-height) + 24px);
+  }
+
+  .story-side {
+    position: sticky;
+    top: calc(var(--navbar-height) + 24px);
+  }
+}
+
+.ad-placeholder {
+  border: 1px dashed var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  text-align: center;
+}
+
+/* ---------- Article content ---------- */
 
 .story__back {
   display: inline-block;
@@ -140,13 +221,12 @@
   padding: 0;
 }
 
+/* ---------- Embeds (right column) ---------- */
+
 .story__embeds {
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .story__embed {
@@ -172,7 +252,7 @@
 }
 
 @media (max-width: 640px) {
-  .story {
+  .story-layout {
     padding-top: 32px;
     padding-bottom: 64px;
   }

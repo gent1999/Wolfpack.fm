@@ -10,6 +10,10 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+function AdPlaceholder({ label }) {
+  return <div className="ad-placeholder">{label}</div>;
+}
+
 function Story() {
   const { slug } = useParams();
   const [article, setArticle] = useState(null);
@@ -32,7 +36,7 @@ function Story() {
   if (status === 'loading') {
     return (
       <main className="page-main">
-        <div className="site-container story story--loading">Loading&hellip;</div>
+        <div className="story-page story--loading">Loading&hellip;</div>
       </main>
     );
   }
@@ -40,7 +44,7 @@ function Story() {
   if (status === 'error') {
     return (
       <main className="page-main">
-        <div className="site-container story story--error">
+        <div className="story-page story--error">
           <h1>Story not found</h1>
           <Link to="/" className="story__back">
             &larr; Back to home
@@ -57,61 +61,78 @@ function Story() {
 
   return (
     <main className="page-main">
-      <article className="site-container story">
-        <Link to="/" className="story__back">
-          &larr; Back to home
-        </Link>
+      <div className="story-page">
+        {/* Once articles have a cover image, it renders here, full-width
+            across all three columns below, above this grid. */}
 
-        <span className="story__tag">{article.tag}</span>
-        <h1 className="story__title">{article.title}</h1>
-        <p className="story__meta">
-          {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt)}
-        </p>
+        <div className="story-layout">
+          <aside className="story-ads-left">
+            <AdPlaceholder label="Ad" />
+            <AdPlaceholder label="Ad" />
+          </aside>
 
-        <div className="story__content" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
+          <article className="story-main">
+            <Link to="/" className="story__back">
+              &larr; Back to home
+            </Link>
 
-        {hasEmbeds && (
-          <div className="story__embeds">
-            {spotifyEmbed && (
-              <iframe
-                className="story__embed"
-                src={spotifyEmbed}
-                height={article.spotifyUrl.includes('/track/') ? 152 : 352}
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                title="Spotify embed"
-              />
-            )}
+            <span className="story__tag">{article.tag}</span>
+            <h1 className="story__title">{article.title}</h1>
+            <p className="story__meta">
+              {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt)}
+            </p>
 
-            {soundcloudEmbed && (
-              <iframe
-                className="story__embed"
-                src={soundcloudEmbed}
-                height={166}
-                frameBorder="0"
-                scrolling="no"
-                allow="autoplay"
-                loading="lazy"
-                title="SoundCloud embed"
-              />
-            )}
+            <div className="story__content" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
+          </article>
 
-            {youtubeEmbed && (
-              <div className="story__embed-video">
-                <iframe
-                  src={youtubeEmbed}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                  title="YouTube embed"
-                />
+          <aside className="story-side">
+            {hasEmbeds && (
+              <div className="story__embeds">
+                {spotifyEmbed && (
+                  <iframe
+                    className="story__embed"
+                    src={spotifyEmbed}
+                    height={article.spotifyUrl.includes('/track/') ? 152 : 352}
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    title="Spotify embed"
+                  />
+                )}
+
+                {soundcloudEmbed && (
+                  <iframe
+                    className="story__embed"
+                    src={soundcloudEmbed}
+                    height={166}
+                    frameBorder="0"
+                    scrolling="no"
+                    allow="autoplay"
+                    loading="lazy"
+                    title="SoundCloud embed"
+                  />
+                )}
+
+                {youtubeEmbed && (
+                  <div className="story__embed-video">
+                    <iframe
+                      src={youtubeEmbed}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      title="YouTube embed"
+                    />
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
-      </article>
+
+            <AdPlaceholder label="Ad" />
+            <AdPlaceholder label="Ad" />
+          </aside>
+        </div>
+      </div>
     </main>
   );
 }
