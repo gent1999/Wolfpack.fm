@@ -96,6 +96,22 @@
   text-align: center;
 }
 
+.story-side__playlist {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 16px;
+}
+
+.story-side__playlist-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
 /* ---------- Article content ---------- */
 
 .story__back {
@@ -221,9 +237,12 @@
   padding: 0;
 }
 
-/* ---------- Embeds (right column) ---------- */
+/* ---------- Per-article embeds (under the content) ---------- */
 
 .story__embeds {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 16px;

@@ -5,6 +5,7 @@ import { getSpotifyEmbedUrl, getSoundcloudEmbedUrl, getYoutubeEmbedUrl } from '.
 import './Story.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
+const WOLFPACK_PLAYLIST_EMBED_URL = 'https://open.spotify.com/embed/playlist/5BU7iuKWstCxQQ5C45Zg8Y?utm_source=generator';
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
@@ -83,9 +84,7 @@ function Story() {
             </p>
 
             <div className="story__content" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
-          </article>
 
-          <aside className="story-side">
             {hasEmbeds && (
               <div className="story__embeds">
                 {spotifyEmbed && (
@@ -127,6 +126,21 @@ function Story() {
                 )}
               </div>
             )}
+          </article>
+
+          <aside className="story-side">
+            <div className="story-side__playlist">
+              <h2 className="story-side__playlist-title">Wolfpack Radio</h2>
+              <iframe
+                className="story__embed"
+                src={WOLFPACK_PLAYLIST_EMBED_URL}
+                height={352}
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Wolfpack Radio playlist"
+              />
+            </div>
 
             <AdPlaceholder label="Ad" />
             <AdPlaceholder label="Ad" />
