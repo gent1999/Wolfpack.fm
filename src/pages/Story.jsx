@@ -63,24 +63,6 @@ function Story() {
   return (
     <main className="page-main">
       <div className="story-page">
-        <div className="story-header">
-          <Link to="/" className="story__back">
-            &larr; Back to home
-          </Link>
-
-          <span className="story__tag">{article.tag}</span>
-          <h1 className="story__title">{article.title}</h1>
-          <p className="story__meta">
-            {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt)}
-          </p>
-        </div>
-
-        {article.imageUrl && (
-          <div className="story-cover">
-            <img src={article.imageUrl} alt="" />
-          </div>
-        )}
-
         <div className="story-layout">
           <aside className="story-ads-left">
             <AdPlaceholder label="Ad" />
@@ -88,6 +70,22 @@ function Story() {
           </aside>
 
           <article className="story-main">
+            <Link to="/" className="story__back">
+              &larr; Back to home
+            </Link>
+
+            <span className="story__tag">{article.tag}</span>
+            <h1 className="story__title">{article.title}</h1>
+            <p className="story__meta">
+              {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt)}
+            </p>
+
+            {article.imageUrl && (
+              <div className="story-cover">
+                <img src={article.imageUrl} alt="" />
+              </div>
+            )}
+
             <div className="story__content" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
 
             {hasEmbeds && (
