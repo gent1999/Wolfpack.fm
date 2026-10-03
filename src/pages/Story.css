@@ -29,10 +29,16 @@
   }
 }
 
+/* Header (back link, tag, title, meta) sits above both the cover image and
+   the three-column grid -- full width, bounded the same as the ad panels. */
+.story-header {
+  margin-top: 48px;
+}
+
 /* Cover image -- full-bleed across all three columns below, not just the
    content column, per the spec for when an article has one. */
 .story-cover {
-  margin-top: 32px;
+  margin-top: 28px;
   height: clamp(220px, 32vw, 460px);
   overflow: hidden;
   border-radius: 12px;
@@ -185,7 +191,6 @@
 }
 
 .story__content {
-  margin-top: 32px;
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--color-text-secondary);
