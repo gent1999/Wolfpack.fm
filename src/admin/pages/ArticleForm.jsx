@@ -7,6 +7,7 @@ const EMPTY_FORM = {
   tag: '',
   content: '',
   authorName: 'Wolfpack.fm',
+  imageUrl: '',
   spotifyUrl: '',
   soundcloudUrl: '',
   youtubeUrl: '',
@@ -29,12 +30,13 @@ function ArticleForm() {
     api
       .getArticle(id)
       .then((data) => {
-        const { title, tag, content, authorName, spotifyUrl, soundcloudUrl, youtubeUrl } = data.article;
+        const { title, tag, content, authorName, imageUrl, spotifyUrl, soundcloudUrl, youtubeUrl } = data.article;
         setForm({
           title,
           tag,
           content,
           authorName,
+          imageUrl: imageUrl || '',
           spotifyUrl: spotifyUrl || '',
           soundcloudUrl: soundcloudUrl || '',
           youtubeUrl: youtubeUrl || '',
@@ -112,6 +114,17 @@ function ArticleForm() {
             onChange={(e) => updateField('tag', e.target.value)}
             placeholder="e.g. Interviews, News, Reviews"
             required
+          />
+        </div>
+
+        <div className="admin-field">
+          <label htmlFor="imageUrl">Image URL (optional)</label>
+          <input
+            id="imageUrl"
+            type="url"
+            value={form.imageUrl}
+            onChange={(e) => updateField('imageUrl', e.target.value)}
+            placeholder="https://example.com/photo.jpg"
           />
         </div>
 

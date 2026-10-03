@@ -63,8 +63,11 @@ function Story() {
   return (
     <main className="page-main">
       <div className="story-page">
-        {/* Once articles have a cover image, it renders here, full-width
-            across all three columns below, above this grid. */}
+        {article.imageUrl && (
+          <div className="story-cover">
+            <img src={article.imageUrl} alt="" />
+          </div>
+        )}
 
         <div className="story-layout">
           <aside className="story-ads-left">
