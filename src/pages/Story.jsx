@@ -130,7 +130,6 @@ function Story() {
 
           <aside className="story-side">
             <div className="story-side__playlist">
-              <h2 className="story-side__playlist-title">Wolfpack Radio</h2>
               <iframe
                 className="story__embed"
                 src={WOLFPACK_PLAYLIST_EMBED_URL}

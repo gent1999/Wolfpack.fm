@@ -98,18 +98,9 @@
 
 .story-side__playlist {
   border: 2px solid var(--color-accent);
-  background: var(--color-surface);
-  padding: 16px;
-}
-
-.story-side__playlist-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 0.9rem;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--color-text);
-  margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
 }
 
 /* ---------- Article content ---------- */
