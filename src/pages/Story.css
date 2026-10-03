@@ -19,6 +19,12 @@
   z-index: -1;
   background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.16), transparent 60%),
     radial-gradient(ellipse 900px 560px at 100% 15%, rgba(59, 130, 246, 0.13), transparent 60%);
+  /* The radial gradients above are centered right at the top edge, so
+     without this their peak brightness sits flush against y:0 with no
+     room to fade in -- it reads as a hard "ceiling" rather than ambient
+     light. Masking the top 80px back in from nothing fixes that. */
+  mask-image: linear-gradient(to bottom, transparent, black 80px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 80px);
   pointer-events: none;
 }
 

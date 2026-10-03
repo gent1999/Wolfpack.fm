@@ -12,6 +12,11 @@
   z-index: -1;
   background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.14), transparent 60%),
     radial-gradient(ellipse 900px 560px at 100% 30%, rgba(59, 130, 246, 0.11), transparent 60%);
+  /* Fade the top 80px back in from nothing -- without this the gradient's
+     peak brightness sits flush against the section's top edge and reads
+     as a hard cutoff rather than ambient light. */
+  mask-image: linear-gradient(to bottom, transparent, black 80px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 80px);
   pointer-events: none;
 }
 
