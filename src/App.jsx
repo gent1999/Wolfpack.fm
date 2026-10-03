@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar.jsx';
+import Footer from './components/layout/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Radio from './pages/Radio.jsx';
 import Artists from './pages/Artists.jsx';
@@ -19,6 +20,7 @@ function PublicPage({ children }) {
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 }

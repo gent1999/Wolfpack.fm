@@ -16,7 +16,10 @@
   /* Layout */
   --container-max: 1440px;
   --container-padding: 40px;
-  --navbar-height: 72px;
+  /* Two rows now (centered brand row + centered nav row) -- see Navbar.css.
+     Switches to a single-row height at the same 900px breakpoint where the
+     nav row collapses into the mobile hamburger menu. */
+  --navbar-height: 112px;
 
   /* Motion */
   --transition-fast: 150ms ease;
@@ -32,9 +35,14 @@
   }
 }
 
+@media (max-width: 900px) {
+  :root {
+    --navbar-height: 64px;
+  }
+}
+
 @media (max-width: 640px) {
   :root {
     --container-padding: 20px;
-    --navbar-height: 64px;
   }
 }

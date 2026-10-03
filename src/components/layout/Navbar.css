@@ -14,14 +14,28 @@
 .navbar__inner {
   height: var(--navbar-height);
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Row 1: logo centered. The spacer + menu-button either side of it are
+   equal-width (1fr) and empty on desktop, so the logo sits dead center of
+   the full row regardless of whether the mobile menu button is showing. */
+.navbar__brand-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  height: 64px;
+}
+
+.navbar__brand-spacer {
+  width: 1px;
 }
 
 .navbar__logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   font-family: var(--font-display);
   font-size: 1.05rem;
@@ -30,7 +44,6 @@
   text-transform: uppercase;
   color: var(--color-text);
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .navbar__logo-icon {
@@ -39,10 +52,14 @@
   flex-shrink: 0;
 }
 
+/* Row 2: nav links + search, also centered. Hidden below 900px in favor of
+   the hamburger menu button in row 1 (see @media block below). */
 .navbar__nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 28px;
+  height: 48px;
 }
 
 .navbar__links {
@@ -90,9 +107,14 @@
 
 .navbar__menu-button {
   display: none;
+  justify-self: end;
 }
 
 @media (max-width: 900px) {
+  .navbar__brand-row {
+    height: var(--navbar-height);
+  }
+
   .navbar__nav {
     display: none;
   }

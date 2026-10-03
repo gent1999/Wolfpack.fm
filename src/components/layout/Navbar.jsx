@@ -17,10 +17,26 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="site-container navbar__inner">
-        <NavLink to="/" className="navbar__logo" aria-label="Wolfpack.fm home">
-          <img src="/wolf_favicon.png" alt="" className="navbar__logo-icon" />
-          WOLFPACK.FM
-        </NavLink>
+        <div className="navbar__brand-row">
+          <span className="navbar__brand-spacer" aria-hidden="true" />
+
+          <NavLink to="/" className="navbar__logo" aria-label="Wolfpack.fm home">
+            <img src="/wolf_favicon.png" alt="" className="navbar__logo-icon" />
+            WOLFPACK.FM
+          </NavLink>
+
+          <button
+            type="button"
+            className="navbar__icon-button navbar__menu-button"
+            aria-label="Open menu"
+            aria-haspopup="true"
+            aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setIsMobileNavOpen(true)}
+          >
+            <Menu size={22} strokeWidth={1.75} />
+          </button>
+        </div>
 
         <nav className="navbar__nav" aria-label="Primary">
           <ul className="navbar__links">
@@ -44,18 +60,6 @@ function Navbar() {
             <Search size={18} strokeWidth={1.75} />
           </button>
         </nav>
-
-        <button
-          type="button"
-          className="navbar__icon-button navbar__menu-button"
-          aria-label="Open menu"
-          aria-haspopup="true"
-          aria-expanded={isMobileNavOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setIsMobileNavOpen(true)}
-        >
-          <Menu size={22} strokeWidth={1.75} />
-        </button>
       </div>
 
       <MobileNav
