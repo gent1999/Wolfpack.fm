@@ -15,7 +15,14 @@
 .story-page::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  /* Break out of .story-page's own max-width/padding box to span the full
+     viewport width -- otherwise this is clipped at 1600px and shows up as
+     a hard vertical seam on monitors wider than that. */
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   z-index: -1;
   background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.16), transparent 60%),
     radial-gradient(ellipse 900px 560px at 100% 15%, rgba(59, 130, 246, 0.13), transparent 60%);
