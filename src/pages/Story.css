@@ -29,10 +29,16 @@
   }
 }
 
+/* Header (back link, tag, title, meta) sits above both side panels --
+   full width, above the three-column grid. The cover image, by contrast,
+   stays inside the content column below (see .story-cover). */
+.story-header {
+  margin-top: 48px;
+}
+
 /* Cover image -- sits inside the content column only, between the ad
    panels, above the body text. Not full-bleed across all three columns. */
 .story-cover {
-  margin-top: 24px;
   height: clamp(200px, 26vw, 380px);
   overflow: hidden;
   border-radius: 12px;
