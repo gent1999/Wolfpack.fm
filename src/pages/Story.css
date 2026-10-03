@@ -1,10 +1,25 @@
 /* Matches Cry808's article page width (1600px, not the site's usual
    1440px --container-max) since it needs room for the ad columns. */
 .story-page {
+  position: relative;
   max-width: 1600px;
   margin: 0 auto;
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
+}
+
+/* Ambient "midnight" glow -- ombre gradients, not a photo tint, so this
+   stays within the "accent, not overlay" guidance given for photography
+   elsewhere on the site. Fixed behind the content via z-index, not meant
+   to be scrolled with the page. */
+.story-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.16), transparent 60%),
+    radial-gradient(ellipse 900px 560px at 100% 15%, rgba(59, 130, 246, 0.13), transparent 60%);
+  pointer-events: none;
 }
 
 @media (min-width: 1280px) {
@@ -82,8 +97,8 @@
 }
 
 .ad-placeholder {
-  border: 1px dashed rgba(59, 130, 246, 0.3);
-  background: var(--color-surface);
+  border: 1px dashed rgba(59, 130, 246, 0.45);
+  background: linear-gradient(160deg, rgba(37, 60, 120, 0.22), rgba(10, 13, 24, 0.7));
   color: var(--color-text-muted);
   font-size: 0.7rem;
   font-weight: 600;
@@ -101,6 +116,7 @@
   border-radius: 12px;
   overflow: hidden;
   line-height: 0;
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.25);
 }
 
 /* ---------- Article content ---------- */
@@ -138,6 +154,7 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--color-text);
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
 }
 
 .story__meta {
@@ -252,6 +269,7 @@
   width: 100%;
   border: none;
   border-radius: 12px;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.18);
 }
 
 .story__embed-video {
@@ -260,6 +278,7 @@
   aspect-ratio: 16 / 9;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.18);
 }
 
 .story__embed-video iframe {
