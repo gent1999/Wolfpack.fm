@@ -1,5 +1,18 @@
 .articles-section {
+  position: relative;
   padding: 64px 0 96px;
+}
+
+/* Same ambient "midnight" glow used on the article page -- gradients, not
+   a photo tint, so it stays within the "accent not overlay" rule. */
+.articles-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.14), transparent 60%),
+    radial-gradient(ellipse 900px 560px at 100% 30%, rgba(59, 130, 246, 0.11), transparent 60%);
+  pointer-events: none;
 }
 
 .articles-section__heading {
@@ -27,7 +40,8 @@
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.15);
   margin-bottom: 16px;
 }
 
