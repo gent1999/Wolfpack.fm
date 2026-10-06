@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Mic2 } from 'lucide-react';
+import { marked } from 'marked';
 import './ArtistPage.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -75,7 +76,9 @@ function ArtistPage() {
 
           <div className="artist-page__intro">
             <h1 className="artist-page__name">{artist.name}</h1>
-            {artist.bio && <p className="artist-page__bio">{artist.bio}</p>}
+            {artist.bio && (
+              <div className="artist-page__bio" dangerouslySetInnerHTML={{ __html: marked.parse(artist.bio) }} />
+            )}
 
             {links.length > 0 && (
               <div className="artist-page__links">
