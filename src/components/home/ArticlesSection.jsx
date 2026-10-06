@@ -24,29 +24,53 @@ function ArticlesSection() {
 
   if (loading || articles.length === 0) return null;
 
+  const [lead, ...rest] = articles.slice(0, PREVIEW_COUNT);
+
   return (
     <section className="articles-section" aria-label="Latest Stories">
       <div className="site-container">
         <div className="articles-section__header">
-          <h2 className="articles-section__heading">Latest Stories</h2>
+          <div>
+            <span className="section-eyebrow">From The Underground</span>
+            <h2 className="articles-section__heading">Latest Stories</h2>
+          </div>
           <Link to="/stories" className="articles-section__view-all">
             View All &rarr;
           </Link>
         </div>
 
-        <div className="articles-section__grid">
-          {articles.slice(0, PREVIEW_COUNT).map((article) => (
-            <Link key={article.id} to={`/stories/${article.slug}`} className="article-card">
-              <div className="article-card__image-wrap">
-                <img src={article.imageUrl || placeholderArt} alt="" className="article-card__image" />
-              </div>
-              <span className="article-card__tag">{article.tag}</span>
-              <h3 className="article-card__title">{article.title}</h3>
-              <p className="article-card__meta">
-                {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt || article.createdAt)}
+        <div className={`articles-section__layout${rest.length === 0 ? ' articles-section__layout--single' : ''}`}>
+          <Link to={`/stories/${lead.slug}`} className="article-feature">
+            <div className="article-feature__image-wrap">
+              <img src={lead.imageUrl || placeholderArt} alt="" className="article-feature__image" />
+            </div>
+            <div className="article-feature__body">
+              <span className="article-feature__tag">{lead.tag}</span>
+              <h3 className="article-feature__title">{lead.title}</h3>
+              <p className="article-feature__meta">
+                {lead.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(lead.publishedAt || lead.createdAt)}
               </p>
-            </Link>
-          ))}
+            </div>
+          </Link>
+
+          {rest.length > 0 && (
+            <div className="article-list">
+              {rest.map((article) => (
+                <Link key={article.id} to={`/stories/${article.slug}`} className="article-row">
+                  <div className="article-row__image-wrap">
+                    <img src={article.imageUrl || placeholderArt} alt="" className="article-row__image" />
+                  </div>
+                  <div className="article-row__body">
+                    <span className="article-row__tag">{article.tag}</span>
+                    <h3 className="article-row__title">{article.title}</h3>
+                    <p className="article-row__meta">
+                      {article.authorName}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(article.publishedAt || article.createdAt)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

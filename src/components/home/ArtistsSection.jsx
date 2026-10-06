@@ -24,7 +24,10 @@ function ArtistsSection() {
     <section className="artists-section" aria-label="Featured Artists">
       <div className="site-container">
         <div className="artists-section__header">
-          <h2 className="artists-section__heading">Featured Artists</h2>
+          <div>
+            <span className="section-eyebrow">The Collective</span>
+            <h2 className="artists-section__heading">Featured Artists</h2>
+          </div>
           <Link to="/artists" className="artists-section__view-all">
             View All &rarr;
           </Link>

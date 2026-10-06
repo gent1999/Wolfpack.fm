@@ -1,50 +1,57 @@
 .site-footer {
   border-top: 1px solid rgba(59, 130, 246, 0.35);
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
-.site-footer__inner {
+.site-footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 56px 0 40px;
+}
+
+.site-footer__brand {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 48px 0 32px;
+  gap: 12px;
 }
 
 .site-footer__logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 400;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--color-text);
 }
 
 .site-footer__logo-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .site-footer__tagline {
-  margin-top: 12px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--color-text-secondary);
+  max-width: 320px;
 }
 
 .site-footer__links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 28px;
+  gap: 32px;
 }
 
 .site-footer__link {
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
   transition: color var(--transition-fast);
 }
@@ -53,24 +60,25 @@
   color: var(--color-accent);
 }
 
-.site-footer__copyright {
-  margin-top: 32px;
-  padding-top: 24px;
-  width: 100%;
-  max-width: 400px;
+.site-footer__bottom {
   border-top: 1px solid var(--color-border);
+  padding: 20px 0 28px;
+}
+
+.site-footer__copyright {
   font-size: 0.78rem;
   letter-spacing: 0.02em;
   color: var(--color-text-muted);
 }
 
 @media (max-width: 640px) {
-  .site-footer__inner {
-    padding: 40px 0 28px;
+  .site-footer__top {
+    flex-direction: column;
+    gap: 28px;
+    padding: 48px 0 32px;
   }
 
   .site-footer__links {
-    gap: 20px;
-    row-gap: 12px;
+    gap: 18px 28px;
   }
 }
