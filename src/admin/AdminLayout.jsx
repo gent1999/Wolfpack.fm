@@ -17,6 +17,9 @@ function AdminLayout() {
           <NavLink to="/admin/articles" className={({ isActive }) => (isActive ? 'admin__nav-link admin__nav-link--active' : 'admin__nav-link')}>
             Articles
           </NavLink>
+          <NavLink to="/admin/artists" className={({ isActive }) => (isActive ? 'admin__nav-link admin__nav-link--active' : 'admin__nav-link')}>
+            Artists
+          </NavLink>
           <a href="/" target="_blank" rel="noopener noreferrer" className="admin__nav-link">
             View Site
           </a>

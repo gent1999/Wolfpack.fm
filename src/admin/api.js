@@ -60,4 +60,10 @@ export const api = {
   createArticle: (data) => request('/api/admin/articles', { method: 'POST', body: data }),
   updateArticle: (id, data) => request(`/api/admin/articles/${id}`, { method: 'PUT', body: data }),
   deleteArticle: (id) => request(`/api/admin/articles/${id}`, { method: 'DELETE' }),
+
+  listArtists: () => request('/api/admin/artists'),
+  getArtist: (id) => request(`/api/admin/artists/${id}`),
+  createArtist: (data) => request('/api/admin/artists', { method: 'POST', body: data }),
+  updateArtist: (id, data) => request(`/api/admin/artists/${id}`, { method: 'PUT', body: data }),
+  deleteArtist: (id) => request(`/api/admin/artists/${id}`, { method: 'DELETE' }),
 };
