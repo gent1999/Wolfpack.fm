@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Star } from 'lucide-react';
 import { api } from '../api.js';
 
 function formatDate(iso) {
@@ -55,7 +56,17 @@ function ArtistsList() {
             <tbody>
               {artists.map((artist) => (
                 <tr key={artist.id}>
-                  <td>{artist.name}</td>
+                  <td>
+                    {artist.featured && (
+                      <Star
+                        size={14}
+                        fill="currentColor"
+                        className="admin-table__star"
+                        aria-label="Featured"
+                      />
+                    )}
+                    {artist.name}
+                  </td>
                   <td>{formatDate(artist.createdAt)}</td>
                   <td>{formatDate(artist.updatedAt)}</td>
                   <td className="admin-table__actions">

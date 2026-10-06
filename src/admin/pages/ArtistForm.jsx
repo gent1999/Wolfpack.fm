@@ -4,6 +4,7 @@ import { api } from '../api.js';
 
 const EMPTY_FORM = {
   name: '',
+  featured: false,
   bio: '',
   imageUrl: '',
   spotifyUrl: '',
@@ -30,9 +31,10 @@ function ArtistForm() {
     api
       .getArtist(id)
       .then((data) => {
-        const { name, bio, imageUrl, spotifyUrl, soundcloudUrl, youtubeUrl, geniusUrl, appleMusicUrl } = data.artist;
+        const { name, featured, bio, imageUrl, spotifyUrl, soundcloudUrl, youtubeUrl, geniusUrl, appleMusicUrl } = data.artist;
         setForm({
           name,
+          featured: Boolean(featured),
           bio: bio || '',
           imageUrl: imageUrl || '',
           spotifyUrl: spotifyUrl || '',
@@ -103,6 +105,18 @@ function ArtistForm() {
             onChange={(e) => updateField('name', e.target.value)}
             required
           />
+        </div>
+
+        <div className="admin-field admin-field--checkbox">
+          <label htmlFor="featured">
+            <input
+              id="featured"
+              type="checkbox"
+              checked={form.featured}
+              onChange={(e) => updateField('featured', e.target.checked)}
+            />
+            Featured (shows first on the homepage and artists page)
+          </label>
         </div>
 
         <div className="admin-field">
