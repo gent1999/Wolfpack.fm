@@ -1,23 +1,6 @@
 .artists-section {
   position: relative;
   padding: 0 0 96px;
-  overflow: hidden;
-}
-
-/* Faint secondary glow for depth -- the main ambient glow lives on
-   .articles-section above and already bleeds into the top of this
-   section, so this stays low-opacity rather than duplicating it. */
-.artists-section::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  width: 100vw;
-  height: 300px;
-  transform: translateX(-50%);
-  z-index: -1;
-  background: radial-gradient(ellipse 800px 380px at 50% 0%, rgba(59, 130, 246, 0.08), transparent 70%);
-  pointer-events: none;
 }
 
 .artists-section__header {
