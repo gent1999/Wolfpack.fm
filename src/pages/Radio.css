@@ -50,6 +50,11 @@
   color: var(--color-accent);
 }
 
+.radio-empty {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
 /* ---------- 1. Radio intro ---------- */
 
 .radio-intro {

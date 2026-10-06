@@ -66,4 +66,10 @@ export const api = {
   createArtist: (data) => request('/api/admin/artists', { method: 'POST', body: data }),
   updateArtist: (id, data) => request(`/api/admin/artists/${id}`, { method: 'PUT', body: data }),
   deleteArtist: (id) => request(`/api/admin/artists/${id}`, { method: 'DELETE' }),
+
+  listRadioTracks: () => request('/api/admin/radio-tracks'),
+  getRadioTrack: (id) => request(`/api/admin/radio-tracks/${id}`),
+  createRadioTrack: (data) => request('/api/admin/radio-tracks', { method: 'POST', body: data }),
+  updateRadioTrack: (id, data) => request(`/api/admin/radio-tracks/${id}`, { method: 'PUT', body: data }),
+  deleteRadioTrack: (id) => request(`/api/admin/radio-tracks/${id}`, { method: 'DELETE' }),
 };

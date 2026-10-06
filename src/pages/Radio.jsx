@@ -1,20 +1,14 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Music2 } from 'lucide-react';
 import SpotifyPlaylistEmbed from '../components/radio/SpotifyPlaylistEmbed.jsx';
 import SpotifyTrackEmbed from '../components/radio/SpotifyTrackEmbed.jsx';
 import './Radio.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
 const PLAYLIST_ID = '5BU7iuKWstCxQQ5C45Zg8Y';
 const PLAYLIST_URL = `https://open.spotify.com/playlist/${PLAYLIST_ID}?si=c91a08c8045f4ecc`;
-
-// Fill in spotifyTrackId for each track to enable real playback -- see
-// SpotifyTrackEmbed, which renders a placeholder until an ID is present.
-const rotationTracks = [
-  { number: '01', title: 'bmw', artist: 'R2R MOE', spotifyTrackId: '' },
-  { number: '02', title: "Actin' Crazy", artist: 'Solo B', spotifyTrackId: '' },
-  { number: '03', title: 'Platinum Fubu', artist: 'Mez, UMI', spotifyTrackId: '' },
-  { number: '04', title: 'Stay Focused', artist: 'Drob, Waldy', spotifyTrackId: '' },
-];
+const ROTATION_COUNT = 4;
 
 const recentlyAdded = [
   { title: 'GASLIGHT', artist: 'ECHO' },
@@ -23,12 +17,24 @@ const recentlyAdded = [
   { title: 'DEAR LORD', artist: 'ECHO' },
 ];
 
-const featuredTrack = rotationTracks[0];
-const featuredHref = featuredTrack.spotifyTrackId
-  ? `https://open.spotify.com/track/${featuredTrack.spotifyTrackId}`
-  : PLAYLIST_URL;
-
 function Radio() {
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/radio-tracks`)
+      .then((res) => res.json())
+      .then((data) => setTracks(data.tracks || []))
+      .catch(() => setTracks([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const rotationTracks = tracks.slice(0, ROTATION_COUNT);
+  const featuredTrack = tracks.find((track) => track.featured) || tracks[0] || null;
+  const featuredHref = featuredTrack?.spotifyTrackId
+    ? `https://open.spotify.com/track/${featuredTrack.spotifyTrackId}`
+    : PLAYLIST_URL;
+
   return (
     <main className="page-main radio-page" aria-label="Radio">
       <section className="radio-intro">
@@ -64,11 +70,21 @@ function Radio() {
             </a>
           </div>
 
-          <div className="radio-rotation__grid">
-            {rotationTracks.map((track) => (
-              <SpotifyTrackEmbed key={track.number} {...track} />
-            ))}
-          </div>
+          {!loading && rotationTracks.length === 0 ? (
+            <p className="radio-empty">No tracks added yet &mdash; add some from the admin panel.</p>
+          ) : (
+            <div className="radio-rotation__grid">
+              {rotationTracks.map((track, index) => (
+                <SpotifyTrackEmbed
+                  key={track.id}
+                  number={String(index + 1).padStart(2, '0')}
+                  title={track.title}
+                  artist={track.artist}
+                  spotifyTrackId={track.spotifyTrackId}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -89,25 +105,28 @@ function Radio() {
           <div className="feature-card" aria-label="Featured this week">
             <span className="radio-eyebrow">Featured This Week</span>
 
-            <div className="feature-card__body">
-              <div className="feature-card__art" aria-hidden="true">
-                <Music2 size={30} strokeWidth={1.5} />
-              </div>
+            {featuredTrack ? (
+              <div className="feature-card__body">
+                <div className="feature-card__art" aria-hidden="true">
+                  <Music2 size={30} strokeWidth={1.5} />
+                </div>
 
-              <div className="feature-card__text">
-                <span className="feature-card__label">Featured Artist</span>
-                <h3 className="feature-card__title">{featuredTrack.artist}</h3>
-                <p className="feature-card__track">&ldquo;{featuredTrack.title}&rdquo;</p>
-                <p className="feature-card__copy">
-                  R2R MOE&rsquo;s &ldquo;bmw&rdquo; stands out for its raw energy and confident delivery, making it
-                  one of the strongest new records in the underground right now. It is a natural fit for Wolfpack
-                  Radio.
-                </p>
-                <a className="feature-card__link" href={featuredHref} target="_blank" rel="noopener noreferrer">
-                  Listen On Spotify &rarr;
-                </a>
+                <div className="feature-card__text">
+                  <span className="feature-card__label">Featured Artist</span>
+                  <h3 className="feature-card__title">{featuredTrack.artist}</h3>
+                  <p className="feature-card__track">&ldquo;{featuredTrack.title}&rdquo;</p>
+                  <p className="feature-card__copy">
+                    {featuredTrack.blurb ||
+                      `${featuredTrack.artist}'s “${featuredTrack.title}” is this week's standout pick on Wolfpack Radio.`}
+                  </p>
+                  <a className="feature-card__link" href={featuredHref} target="_blank" rel="noopener noreferrer">
+                    Listen On Spotify &rarr;
+                  </a>
+                </div>
               </div>
-            </div>
+            ) : (
+              !loading && <p className="radio-empty">No featured track selected yet &mdash; add one from the admin panel.</p>
+            )}
           </div>
         </div>
       </section>

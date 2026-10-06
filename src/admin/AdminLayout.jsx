@@ -20,6 +20,9 @@ function AdminLayout() {
           <NavLink to="/admin/artists" className={({ isActive }) => (isActive ? 'admin__nav-link admin__nav-link--active' : 'admin__nav-link')}>
             Artists
           </NavLink>
+          <NavLink to="/admin/radio-tracks" className={({ isActive }) => (isActive ? 'admin__nav-link admin__nav-link--active' : 'admin__nav-link')}>
+            Radio
+          </NavLink>
           <a href="/" target="_blank" rel="noopener noreferrer" className="admin__nav-link">
             View Site
           </a>

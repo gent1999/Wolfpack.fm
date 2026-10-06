@@ -17,6 +17,8 @@ import ArticlesList from './admin/pages/ArticlesList.jsx';
 import ArticleForm from './admin/pages/ArticleForm.jsx';
 import ArtistsList from './admin/pages/ArtistsList.jsx';
 import ArtistForm from './admin/pages/ArtistForm.jsx';
+import RadioTracksList from './admin/pages/RadioTracksList.jsx';
+import RadioTrackForm from './admin/pages/RadioTrackForm.jsx';
 
 function PublicPage({ children }) {
   return (
@@ -56,6 +58,9 @@ function App() {
           <Route path="artists" element={<ArtistsList />} />
           <Route path="artists/new" element={<ArtistForm />} />
           <Route path="artists/:id/edit" element={<ArtistForm />} />
+          <Route path="radio-tracks" element={<RadioTracksList />} />
+          <Route path="radio-tracks/new" element={<RadioTrackForm />} />
+          <Route path="radio-tracks/:id/edit" element={<RadioTrackForm />} />
         </Route>
       </Routes>
     </AuthProvider>
