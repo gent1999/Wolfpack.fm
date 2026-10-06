@@ -83,27 +83,6 @@ img {
   flex: 1 0 auto;
 }
 
-/* Small uppercase kicker label used above section headings for an
-   editorial magazine feel (homepage sections below the hero). */
-.section-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 12px;
-}
-
-.section-eyebrow::before {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: var(--color-accent);
-}
-
 /* Minimal placeholder used by the not-yet-designed section pages. */
 .placeholder {
   padding-top: 64px;
