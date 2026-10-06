@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mic2 } from 'lucide-react';
+import { Mic2, ArrowRight } from 'lucide-react';
 import './ArtistsSection.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const PREVIEW_COUNT = 4;
+
+// No "role" field exists on the Artist model -- these are the current
+// roster's labels as given. Any artist added later falls back to "Artist".
+const ROLE_LABELS = {
+  ECHO: 'Core Member',
+  Gambull: 'Affiliate',
+  'Joey Seitz': 'Affiliate',
+  Aquah: 'Core Member',
+};
 
 function ArtistsSection() {
   const [artists, setArtists] = useState([]);
@@ -24,7 +33,10 @@ function ArtistsSection() {
     <section className="artists-section" aria-label="Featured Artists">
       <div className="site-container">
         <div className="artists-section__header">
-          <h2 className="artists-section__heading">Featured Artists</h2>
+          <div>
+            <span className="artists-section__eyebrow">The Wolfpack</span>
+            <h2 className="artists-section__heading">Featured Artists</h2>
+          </div>
           <Link to="/artists" className="artists-section__view-all">
             View All &rarr;
           </Link>
@@ -41,8 +53,17 @@ function ArtistsSection() {
                     <Mic2 size={28} strokeWidth={1.5} />
                   </div>
                 )}
+                <div className="artist-card__fade" aria-hidden="true" />
+
+                <div className="artist-card__info">
+                  <h3 className="artist-card__name">{artist.name}</h3>
+                  <span className="artist-card__role">{ROLE_LABELS[artist.name] || 'Artist'}</span>
+                </div>
+
+                <span className="artist-card__arrow" aria-hidden="true">
+                  <ArrowRight size={16} strokeWidth={2} />
+                </span>
               </div>
-              <h3 className="artist-card__name">{artist.name}</h3>
             </Link>
           ))}
         </div>

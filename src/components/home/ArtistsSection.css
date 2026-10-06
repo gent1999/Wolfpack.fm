@@ -1,13 +1,41 @@
 .artists-section {
   position: relative;
   padding: 0 0 96px;
+  overflow: hidden;
+}
+
+/* Faint secondary glow for depth -- the main ambient glow lives on
+   .articles-section above and already bleeds into the top of this
+   section, so this stays low-opacity rather than duplicating it. */
+.artists-section::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 100vw;
+  height: 300px;
+  transform: translateX(-50%);
+  z-index: -1;
+  background: radial-gradient(ellipse 800px 380px at 50% 0%, rgba(59, 130, 246, 0.08), transparent 70%);
+  pointer-events: none;
 }
 
 .artists-section__header {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
+  gap: 20px;
   margin-bottom: 32px;
+}
+
+.artists-section__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 .artists-section__heading {
@@ -20,11 +48,13 @@
 }
 
 .artists-section__view-all {
+  flex-shrink: 0;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--color-accent);
   white-space: nowrap;
+  padding-bottom: 3px;
   transition: opacity var(--transition-fast);
 }
 
@@ -35,33 +65,37 @@
 .artists-section__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: 24px;
 }
 
 .artist-card {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .artist-card__image-wrap {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: 12px;
   background: var(--color-surface);
   border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 0 24px rgba(59, 130, 246, 0.15);
-  margin-bottom: 14px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.artist-card:hover .artist-card__image-wrap {
+  border-color: rgba(59, 130, 246, 0.65);
+  box-shadow: 0 0 28px rgba(59, 130, 246, 0.2);
 }
 
 .artist-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 300ms ease;
+  transition: transform 450ms ease;
 }
 
 .artist-card:hover .artist-card__image {
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 .artist-card__fallback {
@@ -73,18 +107,64 @@
   color: var(--color-text-muted);
 }
 
+.artist-card__fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 5, 10, 0.92) 0%, rgba(4, 5, 10, 0.45) 38%, transparent 68%);
+  pointer-events: none;
+}
+
+.artist-card__info {
+  position: absolute;
+  left: 16px;
+  right: 56px;
+  bottom: 16px;
+}
+
 .artist-card__name {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  color: var(--color-text);
-  text-align: center;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.artist-card__role {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.artist-card__arrow {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(6, 7, 13, 0.55);
+  color: #fff;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.artist-card:hover .artist-card__arrow {
+  border-color: var(--color-accent);
+  background: rgba(59, 130, 246, 0.3);
+  transform: translate(2px, -2px);
 }
 
 @media (max-width: 1024px) {
   .artists-section__grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 }
 
@@ -93,8 +173,18 @@
     padding-bottom: 64px;
   }
 
+  .artists-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
   .artists-section__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
+  }
+
+  .artist-card__info {
+    right: 48px;
   }
 }

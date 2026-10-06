@@ -1,6 +1,7 @@
 .articles-section {
   position: relative;
-  padding: 64px 0 96px;
+  padding: 72px 0 88px;
+  overflow: hidden;
 }
 
 /* Same ambient "midnight" glow used on the article page -- gradients, not
@@ -8,7 +9,11 @@
 .articles-section::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 440px;
+  transform: translateX(-50%);
   z-index: -1;
   background: radial-gradient(ellipse 900px 560px at 10% 0%, rgba(59, 130, 246, 0.14), transparent 60%),
     radial-gradient(ellipse 900px 560px at 100% 30%, rgba(59, 130, 246, 0.11), transparent 60%);
@@ -22,9 +27,20 @@
 
 .articles-section__header {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 32px;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.articles-section__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 .articles-section__heading {
@@ -37,11 +53,13 @@
 }
 
 .articles-section__view-all {
+  flex-shrink: 0;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--color-accent);
   white-space: nowrap;
+  padding-bottom: 3px;
   transition: opacity var(--transition-fast);
 }
 
@@ -54,6 +72,154 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
 }
+
+/* ---------- Homepage "Latest Stories" cards ----------
+   Separate from .article-card (below) on purpose: the /stories listing
+   page reuses .article-card's simpler markup, and this richer card
+   (excerpt, avatar, arrow) only exists on the homepage preview. */
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.story-card:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 28px rgba(59, 130, 246, 0.16);
+}
+
+.story-card__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.story-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 450ms ease;
+}
+
+.story-card:hover .story-card__image {
+  transform: scale(1.05);
+}
+
+.story-card__image-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 7, 13, 0.55), transparent 55%);
+  pointer-events: none;
+}
+
+.story-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 20px 18px;
+}
+
+.story-card__tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: var(--color-accent);
+  width: fit-content;
+}
+
+.story-card__title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+.story-card__excerpt {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.story-card__footer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.story-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+}
+
+.story-card__meta-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.story-card__avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: var(--color-accent);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.story-card__arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.story-card:hover .story-card__arrow {
+  border-color: rgba(59, 130, 246, 0.6);
+  color: var(--color-accent);
+  transform: translateX(2px);
+}
+
+/* ---------- Shared card used by the /stories listing page ----------
+   Left exactly as it was before this pass: Stories.jsx renders
+   .article-card directly (no excerpt/footer wrapper), so changing its
+   padding model here would break that page's spacing. */
 
 .article-card {
   display: flex;
@@ -113,11 +279,21 @@
 
 @media (max-width: 640px) {
   .articles-section {
-    padding: 48px 0 64px;
+    padding: 56px 0 64px;
+  }
+
+  .articles-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
 
   .articles-section__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .story-card__body {
+    padding: 18px 18px 16px;
   }
 }
