@@ -1,0 +1,355 @@
+/* Narrower than the sitewide .site-container (1440px) -- this page reads
+   better as a focused, compact music destination at ~1200px, not a full
+   editorial-width spread. */
+.radio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.radio-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.radio-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.radio-section-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.radio-view-all {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  padding-bottom: 3px;
+  transition: color var(--transition-fast);
+}
+
+.radio-view-all:hover {
+  color: var(--color-accent);
+}
+
+/* ---------- 1. Radio intro ---------- */
+
+.radio-intro {
+  padding: 56px 0 36px;
+}
+
+.radio-intro__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 3vw + 1.5rem, 3rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.radio-intro__copy {
+  margin-top: 14px;
+  max-width: 480px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 2. Playlist embed ---------- */
+
+.radio-playlist {
+  position: relative;
+  padding: 0 0 64px;
+}
+
+/* A restrained glow behind the embed only -- not a full-section background,
+   so this never reads as a second hero. */
+.radio-playlist::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: min(900px, 90vw);
+  height: 320px;
+  transform: translateX(-50%);
+  z-index: -1;
+  background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(59, 130, 246, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.radio-playlist__meta {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ---------- 3. Now in rotation ---------- */
+
+.radio-rotation {
+  padding: 0 0 72px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 56px;
+}
+
+.radio-rotation__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ---------- 4 & 5. About + Featured this week ---------- */
+
+.radio-feature {
+  padding: 0 0 72px;
+}
+
+.radio-feature__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.radio-about__copy {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+.radio-about__copy + .radio-about__copy {
+  margin-top: 12px;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 10px;
+  padding: 28px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.feature-card:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 28px rgba(59, 130, 246, 0.15);
+}
+
+.feature-card__body {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.feature-card__art {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+}
+
+.feature-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.feature-card__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.feature-card__title {
+  margin-top: 6px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.feature-card__track {
+  margin-top: 2px;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.feature-card__copy {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.feature-card__link {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  transition: opacity var(--transition-fast);
+}
+
+.feature-card__link:hover {
+  opacity: 0.75;
+}
+
+/* ---------- 6. Recently added ---------- */
+
+.radio-recent {
+  padding: 0 0 80px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 56px;
+}
+
+.radio-recent__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.recent-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color var(--transition-fast);
+}
+
+.recent-card:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.recent-card__art {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-muted);
+}
+
+.recent-card__body {
+  min-width: 0;
+}
+
+.recent-card__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-card__artist {
+  margin-top: 2px;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1024px) {
+  .radio-rotation__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .radio-feature__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .radio-recent__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 640px) {
+  .radio-intro {
+    padding: 44px 0 28px;
+  }
+
+  .radio-playlist {
+    padding-bottom: 48px;
+  }
+
+  .radio-rotation,
+  .radio-recent {
+    padding-top: 40px;
+  }
+
+  .radio-rotation {
+    padding-bottom: 48px;
+  }
+
+  .radio-feature {
+    padding-bottom: 48px;
+  }
+
+  .radio-recent {
+    padding-bottom: 56px;
+  }
+
+  .radio-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .radio-rotation__grid,
+  .radio-recent__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-card__body {
+    flex-direction: column;
+  }
+
+  .feature-card__art {
+    width: 72px;
+    height: 72px;
+  }
+}

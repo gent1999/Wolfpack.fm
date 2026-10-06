@@ -1,0 +1,50 @@
+.spotify-track-embed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spotify-track-embed__number {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.spotify-track-embed__frame {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.spotify-track-embed__placeholder {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 16px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 10px;
+}
+
+.spotify-track-embed__placeholder-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.spotify-track-embed__placeholder-artist {
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+}
+
+.spotify-track-embed__placeholder-note {
+  margin-top: 4px;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+}

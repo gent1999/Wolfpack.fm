@@ -1,0 +1,21 @@
+.spotify-playlist-embed {
+  line-height: 0;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  /* Matches Spotify's own embed corner radius -- see Hero.css for the same
+     reasoning (the homepage uses this identical treatment). */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast);
+}
+
+.spotify-playlist-embed:hover,
+.spotify-playlist-embed:focus-within {
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.3);
+}
+
+.spotify-playlist-embed__frame {
+  display: block;
+  width: 100%;
+  border: none;
+}
