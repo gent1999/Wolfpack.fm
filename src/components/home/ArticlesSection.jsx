@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import placeholderArt from '../../assets/wolf_pic3.jpg';
+import { safeHttpUrl } from '../../utils/safeUrl.js';
 import './ArticlesSection.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -67,7 +68,7 @@ function ArticlesSection() {
             return (
               <Link key={article.id} to={`/stories/${article.slug}`} className="story-card">
                 <div className="story-card__image-wrap">
-                  <img src={article.imageUrl || placeholderArt} alt="" className="story-card__image" />
+                  <img src={safeHttpUrl(article.imageUrl) || placeholderArt} alt="" className="story-card__image" />
                   <div className="story-card__image-fade" aria-hidden="true" />
                 </div>
 

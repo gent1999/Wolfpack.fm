@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mic2 } from 'lucide-react';
+import { safeHttpUrl } from '../utils/safeUrl.js';
 import './Artists.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -37,8 +38,8 @@ function Artists() {
               {artists.map((artist) => (
                 <Link key={artist.id} to={`/artists/${artist.slug}`} className="artist-card">
                   <div className="artist-card__image-wrap">
-                    {artist.imageUrl ? (
-                      <img src={artist.imageUrl} alt="" className="artist-card__image" />
+                    {safeHttpUrl(artist.imageUrl) ? (
+                      <img src={safeHttpUrl(artist.imageUrl)} alt="" className="artist-card__image" />
                     ) : (
                       <div className="artist-card__fallback">
                         <Mic2 size={32} strokeWidth={1.5} />

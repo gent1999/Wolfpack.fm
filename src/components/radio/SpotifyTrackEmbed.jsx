@@ -1,14 +1,16 @@
+import { isValidSpotifyId } from '../../utils/embeds.js';
 import './SpotifyTrackEmbed.css';
 
 // Real Spotify compact track embeds only -- no custom player UI. When a
-// track doesn't have a spotifyTrackId yet, render a placeholder at the same
-// height so the grid doesn't jump once real IDs are filled in.
+// track doesn't have a valid spotifyTrackId yet, render a placeholder at the
+// same height so the grid doesn't jump once real IDs are filled in. The ID
+// is interpolated into the iframe URL, so only 22-char Spotify IDs pass.
 function SpotifyTrackEmbed({ number, title, artist, spotifyTrackId }) {
   return (
     <div className="spotify-track-embed">
       <span className="spotify-track-embed__number">{number}</span>
 
-      {spotifyTrackId ? (
+      {isValidSpotifyId(spotifyTrackId) ? (
         <iframe
           className="spotify-track-embed__frame"
           src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=generator`}

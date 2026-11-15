@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Music2 } from 'lucide-react';
 import SpotifyPlaylistEmbed from '../components/radio/SpotifyPlaylistEmbed.jsx';
 import SpotifyTrackEmbed from '../components/radio/SpotifyTrackEmbed.jsx';
+import { isValidSpotifyId } from '../utils/embeds.js';
 import './Radio.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -31,7 +32,7 @@ function Radio() {
 
   const rotationTracks = tracks.slice(0, ROTATION_COUNT);
   const featuredTrack = tracks.find((track) => track.featured) || tracks[0] || null;
-  const featuredHref = featuredTrack?.spotifyTrackId
+  const featuredHref = isValidSpotifyId(featuredTrack?.spotifyTrackId)
     ? `https://open.spotify.com/track/${featuredTrack.spotifyTrackId}`
     : PLAYLIST_URL;
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import placeholderArt from '../assets/wolf_pic3.jpg';
 import '../components/home/ArticlesSection.css';
+import { safeHttpUrl } from '../utils/safeUrl.js';
 import './Stories.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -42,7 +43,7 @@ function Stories() {
               {articles.map((article) => (
                 <Link key={article.id} to={`/stories/${article.slug}`} className="article-card">
                   <div className="article-card__image-wrap">
-                    <img src={article.imageUrl || placeholderArt} alt="" className="article-card__image" />
+                    <img src={safeHttpUrl(article.imageUrl) || placeholderArt} alt="" className="article-card__image" />
                   </div>
                   <span className="article-card__tag">{article.tag}</span>
                   <h3 className="article-card__title">{article.title}</h3>

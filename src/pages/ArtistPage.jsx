@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Mic2 } from 'lucide-react';
-import { marked } from 'marked';
+import { renderMarkdown } from '../utils/markdown.js';
+import { safeHttpUrl } from '../utils/safeUrl.js';
 import './ArtistPage.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -54,7 +55,8 @@ function ArtistPage() {
     );
   }
 
-  const links = PLATFORM_LINKS.filter(({ key }) => artist[key]);
+  const links = PLATFORM_LINKS.map((link) => ({ ...link, href: safeHttpUrl(artist[link.key]) })).filter(({ href }) => href);
+  const photo = safeHttpUrl(artist.imageUrl);
 
   return (
     <main className="page-main">
@@ -65,8 +67,8 @@ function ArtistPage() {
 
         <div className="artist-page__header">
           <div className="artist-page__photo">
-            {artist.imageUrl ? (
-              <img src={artist.imageUrl} alt={artist.name} />
+            {photo ? (
+              <img src={photo} alt={artist.name} />
             ) : (
               <div className="artist-page__photo-fallback">
                 <Mic2 size={48} strokeWidth={1.5} />
@@ -77,13 +79,13 @@ function ArtistPage() {
           <div className="artist-page__intro">
             <h1 className="artist-page__name">{artist.name}</h1>
             {artist.bio && (
-              <div className="artist-page__bio" dangerouslySetInnerHTML={{ __html: marked.parse(artist.bio) }} />
+              <div className="artist-page__bio" dangerouslySetInnerHTML={{ __html: renderMarkdown(artist.bio) }} />
             )}
 
             {links.length > 0 && (
               <div className="artist-page__links">
-                {links.map(({ key, label }) => (
-                  <a key={key} href={artist[key]} target="_blank" rel="noopener noreferrer" className="artist-page__link">
+                {links.map(({ key, label, href }) => (
+                  <a key={key} href={href} target="_blank" rel="noopener noreferrer" className="artist-page__link">
                     {label}
                   </a>
                 ))}

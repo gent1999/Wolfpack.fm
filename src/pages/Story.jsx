@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { marked } from 'marked';
-import { getSpotifyEmbedUrl, getSoundcloudEmbedUrl, getYoutubeEmbedUrl } from '../utils/embeds.js';
+import { getSpotifyEmbed, getSoundcloudEmbedUrl, getYoutubeEmbedUrl } from '../utils/embeds.js';
+import { renderMarkdown } from '../utils/markdown.js';
+import { safeHttpUrl } from '../utils/safeUrl.js';
 import './Story.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -55,10 +56,11 @@ function Story() {
     );
   }
 
-  const spotifyEmbed = getSpotifyEmbedUrl(article.spotifyUrl);
+  const spotify = getSpotifyEmbed(article.spotifyUrl);
   const soundcloudEmbed = getSoundcloudEmbedUrl(article.soundcloudUrl);
   const youtubeEmbed = getYoutubeEmbedUrl(article.youtubeUrl);
-  const hasEmbeds = spotifyEmbed || soundcloudEmbed || youtubeEmbed;
+  const hasEmbeds = spotify || soundcloudEmbed || youtubeEmbed;
+  const coverImage = safeHttpUrl(article.imageUrl);
 
   return (
     <main className="page-main">
@@ -82,21 +84,21 @@ function Story() {
           </aside>
 
           <article className="story-main">
-            {article.imageUrl && (
+            {coverImage && (
               <div className="story-cover">
-                <img src={article.imageUrl} alt="" />
+                <img src={coverImage} alt="" />
               </div>
             )}
 
-            <div className="story__content" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
+            <div className="story__content" dangerouslySetInnerHTML={{ __html: renderMarkdown(article.content) }} />
 
             {hasEmbeds && (
               <div className="story__embeds">
-                {spotifyEmbed && (
+                {spotify && (
                   <iframe
                     className="story__embed"
-                    src={spotifyEmbed}
-                    height={article.spotifyUrl.includes('/track/') ? 152 : 352}
+                    src={spotify.src}
+                    height={spotify.type === 'track' ? 152 : 352}
                     frameBorder="0"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy"
