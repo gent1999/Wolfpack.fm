@@ -26,8 +26,17 @@ function Login() {
     try {
       await login(email, password);
       navigate('/admin', { replace: true });
-    } catch {
-      setError('Unable to sign in. Check your credentials and try again.');
+    } catch (err) {
+      // Only a 400/401 means the credentials were rejected. Everything else
+      // (rate limiting, a blocked origin, server or network errors) must not
+      // be reported as "wrong password", or the real cause stays hidden.
+      if (err.status === 400 || err.status === 401) {
+        setError('Unable to sign in. Check your credentials and try again.');
+      } else if (err.status === 429) {
+        setError('Too many sign-in attempts. Please wait 15 minutes and try again.');
+      } else {
+        setError(`Sign-in is unavailable right now (${err.status ? `HTTP ${err.status}` : 'network error'}). Please try again later.`);
+      }
     } finally {
       setSubmitting(false);
     }
