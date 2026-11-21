@@ -1,4 +1,9 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "security/login-ratelimit-and-xss": false
+    }
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
